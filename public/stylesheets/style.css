@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+* {
+	margin:0;
+	padding:0;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.searchArea {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: white;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.resultArea {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: white;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.22);
+}
+
+.resultTable {
+    thead tr {
+        background-color: #CCCCCC;
+    }
+    tbody tr.odd {
+        background-color: #FFFFFF;
+    }
+    tbody tr.even {
+        background-color: #EEEEEE;
+    }
+}
+
+.alertText {
+    color:red;
+    font-weight: bold;
+}

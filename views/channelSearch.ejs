@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/subPage.css' />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <dev>
+      <!-- 検索条件の入力 -->
+      <form method="post" action="/channelSearch">
+        <div class="searchArea">
+          <table>
+            <tr>
+              <td>検索テキスト</td>
+              <td><input type="text" name="qtext" value="<%= condition.qtext %>"></td>
+            </tr>
+            <tr>
+              <td>表示数</td>
+              <td><input type="text" name="maxResults" value="<%= condition.maxResults %>" min="0" max="300"></td>
+            </tr>
+            <tr>
+              <td>ソート順</td>
+              <td>
+                <input type="radio" name="order" id="relevanceRadio" value="relevance" <%= condition.order == 'relevance' ? 'checked' : '' %>><label for="relevanceRadio">関連度</label>
+                <input type="radio" name="order" id="dateRadio" value="date" ><label for="dateRadio" <%= condition.order == 'date' ? 'checked' : '' %>>投稿日</label>
+                <input type="radio" name="order" id="ratingRadio" value="rating"  <%= condition.order == 'rating' ? 'checked' : '' %> ><label for="ratingRadio">レート</label>
+                <input type="radio" name="order" id="titleRadio" value="title" <%= condition.order == 'title' ? 'checked' : '' %> ><label for="titleRadio">タイトル</label>
+                <input type="radio" name="order" id="videoCountRadio" value="videoCount" <%= condition.order == 'videoCount' ? 'checked' : '' %> ><label for="videoCountRadio">アップロード動画数</label>
+              </td>
+            </tr>
+            <tr>
+              <td>投稿日時</td>
+              <td>
+                <input type="date" name="startDate" value="<%= condition.startDate %>"> - 
+                <input type="date" name="endDate" value="<%= condition.endDate %>">
+              </td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="検索" ></td>
+            </tr>
+          </table>
+        </div>
+      </form>
+      <form method="post" action="/channelSearch/NextPage">
+        <!-- 検索結果の表示 -->
+        <% if (result != null && result.data.pageInfo.totalResults != 0) { %>
+          <div class="resultArea">
+            <p style="display:inline-block">検索結果：<%= result.data.items.length %> 件</p>
+            <input style="display:inline-block" type="button" onClick="selectData()" value="選択して閉じる">
+            <label id="alertLabel1" class="alertText"></label>
+            <table id="resultTable">
+              <thead>
+                <tr>            
+                  <th></th>
+                  <th>チャンネル</th>
+                  <th>サムネイル</th>
+                  <th>チャンネル説明</th>
+                  <th>作成日時</th>
+                  <th>ID</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% for (var i = 0; i < result.data.items.length; i++) { %>
+                <% var obj = result.data.items[i]; %>
+                <tr>            
+                  <td><input type="checkbox" id="selectChannel" value ="<%= obj.id.channelId %>"</td>
+                  <td>
+                    <a href="https://www.youtube.com/channel/<%= obj.id.channelId %>" target="_blank"><%= obj.snippet.channelTitle %></href>
+                  </td>
+                  <td><image src=<%= obj.snippet.thumbnails.default.url %>></image></td>
+                  <td><%= obj.snippet.description %></td>
+                  <td><%= obj.snippet.publishedAt %></td>
+                  <td><%= obj.id.channelId %></td>
+                </tr>
+              <% } %>
+              </tbody>
+            </table>
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+            <script type="text/javascript" src="javascripts/DataTables.js"></script>
+          </div>
+          <script type="text/javascript" src="javascripts/channelSearchSelect.js"></script>
+          <input type="button" onClick="selectData()" value="選択して閉じる">
+          <label id="alertLabel2" class="alertText"></label>
+        <% } %>
+        <input type="hidden" id="selectValue">
+      </form>
+    </dev>
+  </body>
+</html>
