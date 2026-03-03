@@ -2,13 +2,19 @@
 <html>
   <head>
     <title><%= title %></title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Youtube動画検索ツール。日付指定、チャンネル指定、新しい順などで検索可能。">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='/stylesheets/topPage.css' />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
+    <h1><%- title %></h1>    
+    <dev class="description">
+      <h2><%- description %></ph2>
+    </dev>
     <dev>
       <!-- 検索条件の入力 -->
       <form method="post" action="/">

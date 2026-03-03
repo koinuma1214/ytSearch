@@ -6,12 +6,12 @@ function selectData() {
 
     // チェックされている値を取得
     $('#resultTable tr').each(function (i, tr) {
-        if ($(tr).find('input:checkbox').size()>0){
-            if ($(tr).find('input:checkbox').is(':checked')){
+        if ($(tr).find('input:radio').size()>0){
+            if ($(tr).find('input:radio').is(':checked')){
                 if ($('#selectValue').val() == '') {
-                    $('#selectValue').val($(tr).find('input:checkbox').val())
+                    $('#selectValue').val($(tr).find('input:radio').val())
                 } else {
-                    $('#selectValue').val("," + $(tr).find('input:checkbox').val())
+                    $('#selectValue').val("," + $(tr).find('input:radio').val())
                 }
             }
         }

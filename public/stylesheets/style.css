@@ -1,12 +1,51 @@
 @charset "utf-8";
 
 * {
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
+}
+
+.description {
+    padding: 0em 0em;
+    margin: 2em 0;
+}
+.description p,.description h2 {
+    margin: 0; 
+    padding: 0;
+    background: whitesmoke;/*背景色*/
 }
 
 body {
+    margin: 0.5em 1em;
+	padding: 2em 0;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+input {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+button,input[type="submit"],input[type="button"] {
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: #668ad8;/*色*/
+  border-radius: 4px;/*角の丸み*/
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+  font-weight: bold;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  border: solid 2px ;/*線色*/
+}
+
+button:active,input[type="submit"]:active,input[type="button"]:active {
+  /*押したとき*/
+  box-shadow: 0 0 4px black;
+}
+
+#resultTable {
+    font: 12px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .searchArea {

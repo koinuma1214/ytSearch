@@ -16,11 +16,17 @@
           <table>
             <tr>
               <td>検索テキスト</td>
-              <td><input type="text" name="qtext" value="<%= condition.qtext %>"></td>
+              <td>
+                <input type="text" name="qtext" value="<%= condition.qtext %>" required>
+                <span></span>
+              </td>
             </tr>
             <tr>
               <td>表示数</td>
-              <td><input type="text" name="maxResults" value="<%= condition.maxResults %>" min="0" max="300"></td>
+              <td>
+                <input type="number" name="maxResults" value="<%= condition.maxResults %>" min="1" max="300">
+                <span></span>
+              </td>
             </tr>
             <tr>
               <td>ソート順</td>
@@ -40,7 +46,7 @@
               </td>
             </tr>
             <tr>
-              <td><input type="submit" value="検索" ></td>
+              <td><input type="submit" value="検索" ><label id="inputAlertLabel" class="alertText"></label></td>
             </tr>
           </table>
         </div>
@@ -50,7 +56,7 @@
         <% if (result != null && result.data.pageInfo.totalResults != 0) { %>
           <div class="resultArea">
             <p style="display:inline-block">検索結果：<%= result.data.items.length %> 件</p>
-            <input style="display:inline-block" type="button" onClick="selectData()" value="選択して閉じる">
+            <input type="button" onClick="selectData()" value="選択して閉じる">
             <label id="alertLabel1" class="alertText"></label>
             <table id="resultTable">
               <thead>
@@ -67,7 +73,7 @@
               <% for (var i = 0; i < result.data.items.length; i++) { %>
                 <% var obj = result.data.items[i]; %>
                 <tr>            
-                  <td><input type="checkbox" id="selectChannel" value ="<%= obj.id.channelId %>"</td>
+                  <td><input type="radio" id="selectChannel" value ="<%= obj.id.channelId %>"</td>
                   <td>
                     <a href="https://www.youtube.com/channel/<%= obj.id.channelId %>" target="_blank"><%= obj.snippet.channelTitle %></href>
                   </td>

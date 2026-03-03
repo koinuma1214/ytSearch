@@ -7,7 +7,7 @@ var router = express.Router();
 
 var condition = {
   maxResults:50,
-  qtext:'tt',
+  qtext:'',
   order : 'relevance'
 }
 var searchCondition = {
@@ -15,7 +15,8 @@ var searchCondition = {
   part:['id','snippet']
 }
 var result = null
-var titleText = 'Youtube Search'
+var titleText = 'Youtube 動画検索'
+var descriptionText = 'Youtubeの動画を検索できるツールです。<br>日付指定、チャンネル指定、新しい順などで検索できます。<br>'
 
 // youtube系の変数
 const {google} = require("googleapis");
@@ -34,6 +35,7 @@ router.get('/', function(req, res, next) {
   res.render('index',
     { 
       title: titleText,
+      description: descriptionText,
       condition: condition,
       result : null
      });
@@ -48,7 +50,7 @@ router.post('/', function(req, res, next) {
    */
   let inputData = req.body
   if(inputData.channelId != '') {
-    searchCondition.channelId = inputData.channelId;
+    searchCondition.channelId = new String(inputData.channelId).split(",")
   }
 
   searchCondition.order = inputData.order;
@@ -126,6 +128,7 @@ router.post('/', function(req, res, next) {
     res.render('index',
       {
         title: titleText,
+        description: descriptionText,
         condition: inputData,
         result :seachResult
     });

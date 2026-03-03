@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
   // 入力された検索条件の取得
   let inputData = req.body
   if (inputData.qtext != '') {
-    searchCondition.qtext = [inputData.qtext];
+    searchCondition.q = [inputData.qtext];
   }
 
   searchCondition.order = inputData.order;
@@ -74,11 +74,12 @@ router.post('/', function(req, res, next) {
         searchCondition.maxResults = tempMaxResults;
 
         tempSeachResult = await youtube.search.list({
-          ...seachResult,
+          ...searchCondition,
           type: 'channel'
         });
 
         seachResult = tempSeachResult;
+        seachResult.part = ['id', 'snippet'];
       } else {
         // 2回目以降の検索
         tempMaxResults = inputData.maxResults - seachResult.data.items.length;
@@ -113,14 +114,7 @@ router.post('/', function(req, res, next) {
         condition: inputData,
         result: seachResult
     });
-  })().catch(
-    res.render('channelSearch',
-      {
-        title: titleText,
-        condition: inputData,
-        result: seachResult
-    })
-  );
+  })();
 });
 
 module.exports = router;
